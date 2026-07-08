@@ -1,0 +1,44 @@
+{
+  "id": "/",
+  "name": "Westminster Leak Repair Pros",
+  "short_name": "WLR Pros",
+  "description": "Non-invasive leak detection and repair in Westminster, CO. Acoustic, thermal, and tracer-gas technology.",
+  "lang": "en-US",
+  "dir": "ltr",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#075985",
+  "theme_color": "#075985",
+  "categories": [
+    "business",
+    "utilities"
+  ],
+  "icons": [
+    {
+      "src": "/favicon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/favicon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

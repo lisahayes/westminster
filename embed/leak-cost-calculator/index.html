@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, follow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Westminster Leak Cost Calculator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--blue:#075985;--blue-dark:#054366;--stone:#f5f0eb;--charcoal:#1e293b;--slate:#475569;--muted:#64748b;--border:#d1c9bf;--white:#fff;--sans:'Source Sans Pro',system-ui,sans-serif;--radius:4px}
+body{font-family:var(--sans);color:var(--charcoal);background:transparent;padding:16px;font-size:15px}
+h2{font-size:1.05rem;font-weight:700;color:var(--blue);margin-bottom:14px}
+.field-group{margin-bottom:14px}
+.field-group label{display:block;font-size:.85rem;font-weight:600;color:var(--charcoal);margin-bottom:5px}
+.field-group input,.field-group select{width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:var(--radius);font-family:var(--sans);font-size:.95rem;color:var(--charcoal);background:var(--white)}
+.field-group input:focus,.field-group select:focus{outline:none;border-color:var(--blue)}
+.radio-group{display:flex;flex-wrap:wrap;gap:8px;margin-top:5px}
+.radio-group label{display:flex;align-items:center;gap:5px;font-size:.85rem;background:var(--white);border:1px solid var(--border);padding:6px 12px;border-radius:var(--radius);cursor:pointer}
+.btn-calc{background:var(--blue);color:#fff;font-family:var(--sans);font-size:.95rem;font-weight:700;padding:11px 24px;border:none;border-radius:var(--radius);cursor:pointer;width:100%;margin-top:6px}
+.btn-calc:hover{background:var(--blue-dark)}
+.result-box{background:#f0f7fe;border:2px solid var(--blue);border-radius:var(--radius);padding:16px;margin-top:14px;display:none}
+.result-metric{font-size:1.5rem;font-weight:700;color:var(--blue);margin-bottom:4px}
+.result-sub{font-size:.82rem;color:var(--slate);margin-bottom:10px}
+.result-note{background:var(--stone);border-left:3px solid var(--blue);padding:10px 12px;font-size:.82rem;color:var(--slate);margin-top:8px}
+.result-warning{background:#fef9f0;border-left:3px solid #f59e0b;padding:10px 12px;font-size:.82rem;color:#92400e;margin-top:8px}
+.cta-embed{display:block;background:var(--blue);color:#fff;font-weight:700;padding:11px;border-radius:var(--radius);text-align:center;margin-top:12px;font-size:.9rem;text-decoration:none}
+.cta-embed:hover{background:var(--blue-dark)}
+.powered{text-align:center;font-size:.75rem;color:var(--muted);margin-top:10px}
+.powered a{color:var(--blue)}
+.drip-btns{display:flex;gap:6px;margin-bottom:8px}
+.drip-btn{padding:6px 12px;border:1px solid var(--border);border-radius:var(--radius);background:var(--white);cursor:pointer;font-size:.82rem;font-weight:600}
+.drip-btn.active{background:var(--blue);color:#fff;border-color:var(--blue)}
+
+.logo-img { display: block; height: 44px; width: auto; max-width: 220px; }
+.logo-img--white { display: none; }
+.logo-img--color { display: block; }
+.footer-logo { display: block; height: 40px; width: auto; margin-bottom: 14px; }
+</style>
+</head>
+<body>
+<script>
+function setDripE(val){
+  document.getElementById("e-drips").value=val;
+  document.querySelectorAll(".drip-btn").forEach(function(b){b.classList.toggle("active",parseInt(b.dataset.val)===val);});
+}
+function toggleTypeE(){
+  var t=document.getElementById("e-type").value;
+  document.getElementById("e-drip-r").style.display=(t==="drip")?"":"none";
+  document.getElementById("e-toilet-r").style.display=(t==="toilet")?"":"none";
+  document.getElementById("e-trickle-r").style.display=(t==="trickle")?"":"none";
+}
+function calcE(){
+  var t=document.getElementById("e-type").value;
+  var gpd=0;
+  if(t==="drip"){var d=parseFloat(document.getElementById("e-drips").value)||0;gpd=(d*60*24)/15140;}
+  else if(t==="toilet"){gpd=parseFloat(document.getElementById("e-toilet-gpd").value)||480;}
+  else if(t==="trickle"){gpd=(parseFloat(document.getElementById("e-gph").value)||0)*24;}
+  var gpm=gpd*30.44;var gpy=gpd*365;
+  var base=5000;var tot=base+gpm;
+  var added=cW(tot)-cW(base);
+  var yearly=added*12;
+  var isW=document.querySelector("input[name=\"e-win\"]:checked");
+  var winter=isW?isW.value==="yes":false;
+  var sewerHtml="";
+  if(winter){var s=(gpm/1000)*9.90*12;sewerHtml="<div class=\"result-warning\">Winter sewer impact: about $"+s.toFixed(0)+" added over next 12 months.</div>";}
+  var r=document.getElementById("e-result");
+  r.style.display="block";
+  document.getElementById("e-main").innerHTML="$"+added.toFixed(2)+"/month";
+  document.getElementById("e-sub").innerHTML=Math.round(gpm).toLocaleString()+" gal/month | $"+yearly.toFixed(0)+"/year";
+  document.getElementById("e-extra").innerHTML=sewerHtml;
+}
+function cW(g){var t1=4.20,t2=7.66,t3=9.58,m1=8000,m2=40000;if(g<=m1)return(g/1000)*t1;if(g<=m2)return(m1/1000)*t1+((g-m1)/1000)*t2;return(m1/1000)*t1+((m2-m1)/1000)*t2+((g-m2)/1000)*t3;}
+document.addEventListener("DOMContentLoaded",function(){document.getElementById("e-type").addEventListener("change",toggleTypeE);toggleTypeE();});
+</script>
+
+<h2>Westminster Leak Cost Calculator</h2>
+<div class="field-group">
+  <label for="e-type">Leak type</label>
+  <select id="e-type"><option value="drip">Dripping faucet</option><option value="toilet">Running toilet</option><option value="trickle">Trickle/stream</option></select>
+</div>
+<div id="e-drip-r" class="field-group">
+  <label>Drips per minute</label>
+  <div class="drip-btns"><button class="drip-btn" data-val="10" onclick="setDripE(10)">Slow (10)</button><button class="drip-btn active" data-val="60" onclick="setDripE(60)">Steady (60)</button><button class="drip-btn" data-val="120" onclick="setDripE(120)">Fast (120)</button></div>
+  <input type="number" id="e-drips" value="60" min="1" max="500">
+</div>
+<div id="e-toilet-r" class="field-group" style="display:none"><label>Gallons/day</label><input type="number" id="e-toilet-gpd" value="480" min="1"></div>
+<div id="e-trickle-r" class="field-group" style="display:none"><label>Gallons/hour</label><input type="number" id="e-gph" value="1" step="0.1" min="0.1"></div>
+<div class="field-group">
+  <label>Is it Jan, Feb, or March? (winter sewer window)</label>
+  <div class="radio-group"><label><input type="radio" name="e-win" value="no" checked> No</label><label><input type="radio" name="e-win" value="yes"> Yes</label></div>
+</div>
+<button class="btn-calc" onclick="calcE()">Calculate Cost</button>
+<div class="result-box" id="e-result">
+  <div class="result-metric" id="e-main"></div>
+  <div class="result-sub" id="e-sub"></div>
+  <div id="e-extra"></div>
+  <a href="tel:+13035523896" class="cta-embed">Call (303) 552-3896 &mdash; Same-Day Repair</a>
+</div>
+<div class="powered">Powered by <a href="https://westminsterleakrepairpros.com" target="_blank">Westminster Leak Repair Pros</a></div>
+</body></html>
