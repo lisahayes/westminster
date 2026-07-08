@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 96" role="img" aria-label="Westminster Leak Repair Pros icon">
+  <title>Westminster Leak Repair Pros</title>
+  <path d="M40 4 L72 16 L72 46 Q72 68 40 82 Q8 68 8 46 L8 16 Z" fill="#075985"/>
+  <path d="M40 4 L72 16 L72 46 Q72 68 40 82 L40 4 Z" fill="#84A98C" opacity="0.45"/>
+  <path d="M40 11 L66 21 L66 44 Q66 63 40 75 Q14 63 14 44 L14 21 Z" fill="#0a6fa8"/>
+  <path d="M40 11 L66 21 L66 44 Q66 63 40 75 L40 11 Z" fill="#84A98C" opacity="0.28"/>
+  <rect x="26" y="48" width="6" height="18" rx="3" fill="white" transform="rotate(-35 29 57)"/>
+  <circle cx="33" cy="40" r="4.5" fill="white"/>
+  <path d="M40 33 Q48 37 48 40 Q48 43 40 47" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M44 26 Q56 32 56 40 Q56 48 44 54" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.65"/>
+</svg>

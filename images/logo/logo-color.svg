@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 64" role="img" aria-label="Westminster Leak Repair Pros">
+  <title>Westminster Leak Repair Pros</title>
+  <!-- Shield icon -->
+  <g transform="translate(4,4) scale(0.73)">
+    <!-- outer shield -->
+    <path d="M38 4 L68 14 L68 42 Q68 62 38 74 Q8 62 8 42 L8 14 Z" fill="#075985"/>
+    <!-- sage right half -->
+    <path d="M38 4 L68 14 L68 42 Q68 62 38 74 L38 4 Z" fill="#84A98C" opacity="0.45"/>
+    <!-- inner shield -->
+    <path d="M38 10 L62 18 L62 40 Q62 57 38 67 Q14 57 14 40 L14 18 Z" fill="#0a6fa8"/>
+    <!-- inner sage right half -->
+    <path d="M38 10 L62 18 L62 40 Q62 57 38 67 L38 10 Z" fill="#84A98C" opacity="0.28"/>
+    <!-- sensor probe -->
+    <rect x="24" y="42" width="5" height="15" rx="2.5" fill="white" transform="rotate(-35 26.5 49.5)"/>
+    <!-- sensor head dot -->
+    <circle cx="30" cy="37" r="3.5" fill="white"/>
+    <!-- acoustic arcs -->
+    <path d="M36 31 Q42 34 42 37 Q42 40 36 43" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M39 25 Q49 30 49 37 Q49 44 39 49" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" opacity="0.65"/>
+  </g>
+  <!-- Wordmark -->
+  <text x="62" y="28" font-family="Georgia,'Times New Roman',serif" font-weight="700" font-size="22" fill="#1e293b" letter-spacing="0.04em">WESTMINSTER</text>
+  <text x="62" y="50" font-family="Arial,system-ui,sans-serif" font-weight="600" font-size="13" fill="#075985" letter-spacing="0.12em">LEAK REPAIR PROS</text>
+</svg>
